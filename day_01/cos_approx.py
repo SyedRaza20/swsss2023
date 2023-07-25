@@ -26,6 +26,7 @@ def cos_approx(x, accuracy=10):
         This function returns one value (cos_approx_value) that is the cosine
         of x
     """
+
     # initializing the return value below:
     cos_approx_value = 0
     
@@ -35,6 +36,7 @@ def cos_approx(x, accuracy=10):
         cos_approx_value = cos_approx_value + ((-1)**n/(factorial(2*n)))*(x**(2*n))
     
     return cos_approx_value
+
 
 # Will only run if this is run from command line as opposed to imported
 if __name__ == '__main__':  # main code block
