@@ -40,15 +40,14 @@ if __name__ == "__main__":
     lam = 80
     
     # the backgroung heat Q:
-    sun_heat = 0.4
     Q = np.zeros(nPts)
-    Q[(x>200)&(x<400)] = sun_heat
+    Q[(x>200)&(x<400)] = 0.4
     plt.plot(Q)
     dz = x[1] - x[0]
     dz2 = dz**2
     
     # making it time dependent:
-    nDays = 3
+    nDays = 27
     dt = 1 # in hours
     times = np.arange(0, nDays*24, dt) # in hours
     lon = 73.43
@@ -61,14 +60,17 @@ if __name__ == "__main__":
     temp = []
     
     # F10.7 dependence:
-    # f10_7 = 100 + (50/(24*365) * times) + (25 * np.sin(times/(27*24)) * 2 * np.pi)
+    f10_7 = 100 + (50/(24*365) * times) + (25 * np.sin(times/(27*24)) * 2 * np.pi)
     
     #plt.plot(f10_7)
     
     # do the for loop:
-    for hour in times:
+    for i, hour in enumerate(times):
         ut = hour % 24
         local_time = lon/15 + ut
+        
+        # the sun_heat:
+        sun_heat = f10_7[i] * 0.4/100
         
         # the t_lower variable; adding the sin as the 10.7 dependence   
         t_lower = 200.0 + AmpDi  * np.sin((local_time/24) * 2*np.pi + PhaseDi) + AmpSd * np.sin((local_time/24) * 2*2*np.pi + PhaseSd)
