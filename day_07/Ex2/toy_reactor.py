@@ -12,6 +12,14 @@ import runge_kutta as rk
 #    k - numpy array carrying the rate coefficients k1 = 100, k2=0.25, k3=1
 #    c_0 - initial composition, i.e., c_0(A) = 1, c_0(B)=c_0(C)=0.0
 
+# The s function:
+S = np.array([[1,-1,0], 
+              [0,1,-1], 
+              [0,0,1]])
+
+k = np.array([1, 2, 1])
+c_0 = np.array([1, 0.25, 0])
+
 def reaction_rates(c,k):
     """
         Function implementing the reaction rate computation of our toy reactor
@@ -23,7 +31,9 @@ def reaction_rates(c,k):
         outputs:
             reaction rates (numpy array)
     """
-    return ... # please complete this function
+    # make it more general:
+    
+    return np.array([k[0]*c[0], k[1]*c[0]*c[1], k[2]*c[1]]) # please complete this function
 
 def reactor(c,t,k,S):
     """
@@ -38,17 +48,17 @@ def reactor(c,t,k,S):
         outputs: 
             dc/dt - numpy array
     """
-    return ... # please complete this function
+    return np.dot(S, reaction_rates(c, k)) #+ np.sin(t)**2 * c_0# please complete this function
 
 # Please play around with the step size to study the effect on the solution
-h = 1e-3
+h = 0.001
 
 ########################################
 ### hereafter no more code modification necessary
 ########################################
 
 # time horizon
-tspan = (0.0,5.0)
+tspan = (0.0,50.0)
 
 
 # define dormant_prince_stepper
@@ -68,7 +78,7 @@ fig, axs = plt.subplots(2)
 ax = axs[0]
 ax.set_xlabel("time")
 ax.set_ylabel("concentration")
-for i in range(3):
+for i in range(2):
     ax.plot(time_points, [c[i] for c in trajectory],
             color=colors[i], 
             linewidth=2, 

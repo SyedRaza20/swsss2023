@@ -29,11 +29,16 @@ def first_derivative(f, x):
     nPts = len(f)
     
     dfdx = np.zeros(nPts)
+    
+    twodx = x[2:] - x[:-2]
 
-    # do calculation here - need 3 statements:
-    #  1. left boundary ( dfdx(0) = ...)
-    #  2. central region (using spans, like dfdx(1:nPts-2) = ...)
-    #  3. right boundary ( dfdx(nPts-1) = ... )
+    #  Calculating the Taylor's series derivitive:
+    dfdx[1:-1] = (f[2:] - f[:-2]) / 2*twodx
+    
+    # Boundary conditions:
+    dfdx[0] = dfdx[1]
+    dfdx[-1] = dfdx[-2]
+    
 
     return dfdx
 
@@ -63,12 +68,13 @@ def second_derivative(f, x):
     nPts = len(f)
     
     d2fdx2 = np.zeros(nPts)
-
-    # do calculation here - need 3 statements:
-    #  1. left boundary ( dfdx(0) = ...)
-    #  2. central region (using spans, like dfdx(1:nPts-2) = ...)
+    
+    onedx = x[1:-1] - x[2:]
+    d2fdx2[1:-1] =  (f[2:] + f[0:-2] - 2*f[1:-1]) / onedx**2
     #  3. right boundary ( dfdx(nPts-1) = ... )
-
+    d2fdx2[0] = d2fdx2[1]
+    d2fdx2[-1] = d2fdx2[-2]
+    
     return d2fdx2
 
 # ----------------------------------------------------------------------
@@ -98,7 +104,6 @@ def analytic(x):
     f = 4 * x ** 2 - 3 * x -7
     dfdx = 8 * x - 3
     d2fdx2 = np.zeros(len(f)) + 8.0
-
     return f, dfdx, d2fdx2
 
 # ----------------------------------------------------------------------

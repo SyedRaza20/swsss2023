@@ -1,4 +1,5 @@
 from numpy.linalg import norm
+import matplotlib.pyplot as plt
 
 def explicit_RK_stepper(f,x,t,h,a,b,c):
     """
@@ -16,7 +17,14 @@ def explicit_RK_stepper(f,x,t,h,a,b,c):
         outputs: 
             x_hat - estimate of the state at time t+h
     """
-    return ... # please complete this function 
+    s = len(c)
+    ks = [f(x,t)]
+    x_hat = x + h*b[0]*ks[0]
+    for i in range(s-1):
+        y = x + h*sum(a[i][j]*ks[j] for j in range(i+1))
+        ks.append(f(y, t+h*c[i+1]))
+        x_hat += h*b[i+1]*ks[-1]
+    return x_hat
 
 def integrate(f, x0, tspan, h, step):
     """
@@ -49,3 +57,4 @@ def integrate(f, x0, tspan, h, step):
         trajectory.append(x)
         ts.append(t)
     return trajectory, ts
+

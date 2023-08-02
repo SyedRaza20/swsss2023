@@ -8,11 +8,11 @@ import dormand_prince as dp
 import runge_kutta as rk
 # import time to measure performance
 import time 
+from runge_kutta import adaptive_explicit_RK_stepper
 
 # define adaptive Dormand-Prince stepper
 def adaptive_dormand_prince_stepper(f,x,t,h):
-    return ... # please complete this function 
-               # using rk.adaptive_explicit_RK_stepper
+    return adaptive_explicit_RK_stepper(f,x,t,h,dp.a,dp.b,dp.c,dp.b_control)
 
 def reaction_rates(c,k):
     """

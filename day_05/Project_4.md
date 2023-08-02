@@ -3,7 +3,7 @@ Description: In the project, the students will work together to analyze and visu
 *Note: There are days with missing data in the CHAMP dataset; the output length for each file can be different.*
 
 
-## Task 1: Download and extract the CHAMP trajectory data from https://zenodo.org/record/4602380#.Ytn6DC-B28W 
+## Task 1: Download and extract the CHAMP trajectory data from https://zenodo.org/record/4602380#.Ytn6DC-B28W (DONE)
 Download and unzip the CHAMP trajectory and density data to a folder of your choice. Read the trajectory data (local solar time, latitude, and altitude) from the daily CHAMP data for the first 50 days in 2002
 
 *Hint 1: You can use the "os.listdir" command to list all files in the current folder.*
@@ -12,7 +12,7 @@ Download and unzip the CHAMP trajectory and density data to a folder of your cho
 
 *Hint 3: You can use the "pandas.read_csv()" command to read a space delimited text file*
 
-## Task 2: Extract the hourly trajectory data
+## Task 2: Extract the hourly trajectory data (DONE)
 The CHAMP dataset was generated using a temporal resolution of 10 seconds. Slice the data such that the data has a temporal resolution of 1 hour.
 
 *Hint 1: You can use the "np.where" command to locate the index of the row of interest.*
